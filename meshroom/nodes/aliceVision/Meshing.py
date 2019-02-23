@@ -51,7 +51,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='estimateSpaceMinObservationAngle',
             label='Min Observations Angle For SfM Space Estimation',
-            description='Minimum angle between two observations for SfM space estimation.',
+            description='Minimum angle between two observations for SfM space estimation. If you have many images at frequent intervals, (e.g. every 5 degrees) then set this to 4 degrees.',
             value=10,
             range=(0, 120, 1),
             uid=[0],
@@ -59,7 +59,7 @@ class Meshing(desc.CommandLineNode):
         desc.IntParam(
             name='maxInputPoints',
             label='Max Input Points',
-            description='Max input points loaded from depth map images.',
+            description='Max input points loaded from depth map images. This is very RAM heavy, but increasing it allows you to create very dense meshes (max 500M).',
             value=50000000,
             range=(500000, 500000000, 1000),
             uid=[0],
@@ -67,15 +67,15 @@ class Meshing(desc.CommandLineNode):
         desc.IntParam(
             name='maxPoints',
             label='Max Points',
-            description='Max points at the end of the depth maps fusion.',
+            description='Max points at the end of the depth maps fusion. Go very high, 50M for super highrez meshes. Limits single block partitioning',
             value=5000000,
-            range=(100000, 10000000, 1000),
+            range=(100000, 50000000, 1000),
             uid=[0],
         ),
         desc.IntParam(
             name='maxPointsPerVoxel',
             label='Max Points Per Voxel',
-            description='Max points per voxel',
+            description='Max points per voxel. Unknown if increasing or decreasing or increasing helps mesh density',
             value=1000000,
             range=(500000, 30000000, 1000),
             uid=[0],
@@ -115,7 +115,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='angleFactor',
             label='angleFactor',
-            description='angleFactor',
+            description='angleFactor is the max visibility angle per point',
             value=15.0,
             range=(0.0, 200.0, 1.0),
             uid=[0],
@@ -187,7 +187,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='minAngleThreshold',
             label='minAngleThreshold',
-            description='minAngleThreshold',
+            description='minAngleThreshold, if the max angle of cameras seeing this point is less than the threshold, the vertex is discarded',
             value=1.0,
             range=(0.0, 10.0, 0.01),
             uid=[0],
