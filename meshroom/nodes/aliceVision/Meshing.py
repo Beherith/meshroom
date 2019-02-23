@@ -116,6 +116,10 @@ class Meshing(desc.CommandLineNode):
             name='angleFactor',
             label='angleFactor',
             description='angleFactor is the max visibility angle per point',
+            # https://github.com/alicevision/AliceVision/blob/d9615ca7da3fab59f3987bc9af912ee433fda732/src/aliceVision/fuseCut/DelaunayGraphCut.cpp#L1027
+            #        const double angleScore = 1.0 + params.angleFactor / maxAngle;
+            #       // Combine angleScore with simScore
+            #       simScorePrepare[vIndex] = simScorePrepare[vIndex] * angleScore;
             value=15.0,
             range=(0.0, 200.0, 1.0),
             uid=[0],
@@ -133,7 +137,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='pixSizeMarginInitCoef',
             label='pixSizeMarginInitCoef',
-            description='pixSizeMarginInitCoef',
+            description='pixSizeMarginInitCoef, start low for many points',
             value=2.0,
             range=(0.0, 10.0, 0.1),
             uid=[0],
@@ -151,7 +155,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='voteMarginFactor',
             label='voteMarginFactor',
-            description='voteMarginFactor',
+            description='voteMarginFactor, increase to force more vertices :D',
             value=4.0,
             range=(0.1, 10.0, 0.1),
             uid=[0],
@@ -169,7 +173,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='simGaussianSizeInit',
             label='simGaussianSizeInit',
-            description='simGaussianSizeInit',
+            description='simGaussianSizeInit, similarity is convolved with a gaussian kernel of this size. This maybe should be reduced quite a bit for best results and to avoid smoothing',
             value=10.0,
             range=(0.0, 50.0, 0.1),
             uid=[0],
@@ -178,7 +182,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='simGaussianSize',
             label='simGaussianSize',
-            description='simGaussianSize',
+            description='simGaussianSize, set to lower!',
             value=10.0,
             range=(0.0, 50.0, 0.1),
             uid=[0],
