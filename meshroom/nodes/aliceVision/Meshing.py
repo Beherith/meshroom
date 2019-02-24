@@ -137,7 +137,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='pixSizeMarginInitCoef',
             label='pixSizeMarginInitCoef',
-            description='pixSizeMarginInitCoef, start high for many points, as high as 10.0',
+            description='pixSizeMarginInitCoef, start LOW for many points, as low as 0.5',
             value=2.0,
             range=(0.0, 10.0, 0.1),
             uid=[0],
@@ -146,7 +146,7 @@ class Meshing(desc.CommandLineNode):
         desc.FloatParam(
             name='pixSizeMarginFinalCoef',
             label='pixSizeMarginFinalCoef',
-            description='pixSizeMarginFinalCoef, dont go too high with this, cause it will iteratively increase',
+            description='pixSizeMarginFinalCoef, dont go too high with this, cause it will iteratively increase anyway (1.0 is fine)',
             value=4.0,
             range=(0.0, 10.0, 0.1),
             uid=[0],
